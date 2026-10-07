@@ -136,7 +136,7 @@ export async function buildLab(scene: THREE.Scene) {
   const runes = animate(buildRuneCircle(0.8), portalPos.x, 0.012, portalPos.z + 0.1);
 
   // Coffre du Cryptogramme : au mur sud, sous le tableau, à côté de la pendule
-  const chest = await model('treasure_chest', 3.0, 0, HD - 0.65, PI, 1, true);
+  const chest = await model('treasure_chest', 2.75, 0, HD - 0.65, PI, 1, true);
   // Couvercle articulé (atelier Cryptogramme) : rattaché à une charnière placée sur son bord arrière
   chest.updateMatrixWorld(true);
   const lid = chest.getObjectByName('treasure_chest_lid')!;
@@ -255,7 +255,7 @@ export async function buildLab(scene: THREE.Scene) {
   await model('fancy_picture_frame_02', 2.9, 2.1, HD - 0.01, PI, 1.5);
 
   // ---------- Coin sud-est : pendule, fauteuil, guéridon ----------
-  const clockPos = new THREE.Vector3(4.2, 0, HD - 0.35);
+  const clockPos = new THREE.Vector3(3.95, 0, HD - 0.35); // un peu à gauche : on peut passer entre elle et la vitrine pour atteindre la serrure
   const clock = await model('vintage_grandfather_clock_01', clockPos.x, 0, clockPos.z, PI, 1, true);
   // Dans la vitrine noire de la pendule, une inscription invisible tant que l'intérieur n'est pas éclairé
   const clockBox = new THREE.Box3().setFromObject(clock);
@@ -339,7 +339,11 @@ export async function buildLab(scene: THREE.Scene) {
     await model('brass_candleholders', cabBox.min.x + 0.14, counterY(1.55), 1.55, -PI / 2, 0.45),
     await model('vintage_binocular', cabBox.min.x + 0.14, counterY(2.75), 2.75, -PI / 2 + 0.4),
   ];
-  const lockPos = new THREE.Vector3(cabBox.min.x + 0.25, 0.7, cabBox.max.z + 0.006);
+  // sur le flanc côté pendule, près du coin avant : posée sur la vraie surface (le comptoir déborde de la boîte englobante)
+  const lockX = cabBox.min.x + 0.26;
+  const lockY = 0.78;
+  const lockHit = new THREE.Raycaster(new THREE.Vector3(lockX, lockY, cabBox.max.z + 0.5), new THREE.Vector3(0, 0, -1)).intersectObject(cabinet, true)[0];
+  const lockPos = new THREE.Vector3(lockX, lockY, (lockHit ? lockHit.point.z : cabBox.max.z) + 0.005);
   const lock = buildCabinetLock();
   lock.position.copy(lockPos);
   scene.add(lock);

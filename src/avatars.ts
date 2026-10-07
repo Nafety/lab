@@ -73,9 +73,9 @@ function buildArm(side: number, jacket: THREE.Material, golden: THREE.Object3D[]
     // boussole au poignet gauche, comme les bras du joueur
     arm.add(mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.012, 14), brass, 0, -0.5, -0.045).rotateX(Math.PI / 2));
   }
-  // bracelets d'or de la bénédiction et leur halo (affichés seulement si le joueur l'a reçue)
+  // bracelet d'or de la bénédiction et son halo (affichés seulement si le joueur l'a reçue)
   const blessing = new THREE.Group();
-  for (const y of [-0.545, -0.575]) blessing.add(mesh(new THREE.TorusGeometry(0.05, 0.012, 6, 18), goldGlow, 0, y, 0).rotateX(Math.PI / 2));
+  blessing.add(mesh(new THREE.TorusGeometry(0.05, 0.012, 6, 18), goldGlow, 0, -0.56, 0).rotateX(Math.PI / 2)); // un seul anneau par poignet, comme le joueur
   const halo = new THREE.Sprite(haloMat);
   halo.scale.set(0.22, 0.22, 1);
   halo.position.y = -0.56;
