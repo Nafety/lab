@@ -1,0 +1,61 @@
+/* Styles partagés par les ateliers : panneaux en papier ancien, choix de réponses, apparitions. */
+
+.paper-panel {
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(255, 250, 235, 0.55), transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(150, 110, 50, 0.18), transparent 60%),
+    linear-gradient(160deg, #f1e5c8, #dcc79a);
+  border: 1px solid #8a6a3a;
+  box-shadow: 0 0 0 5px rgba(50, 32, 12, 0.55), 0 20px 50px rgba(0, 0, 0, 0.55);
+  font-family: var(--serif);
+}
+
+.kicker {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.9em;
+  color: #7a5520;
+}
+
+button.choice {
+  display: block;
+  width: 100%;
+  margin: 0.4em 0;
+  padding: 0.55em 0.9em;
+  text-align: left;
+  background: rgba(255, 250, 235, 0.55);
+  color: var(--ink);
+  border: 1px solid rgba(90, 60, 25, 0.45);
+  box-shadow: none;
+  font-size: 1.02em;
+}
+button.choice:hover:not(:disabled) { background: rgba(255, 250, 235, 0.95); transform: translateX(3px); }
+button.choice:disabled { cursor: default; opacity: 0.75; }
+button.choice.right { background: #c9dcb0; border-color: #4f7a2a; opacity: 1; animation: pop 0.35s; }
+button.choice.wrong { background: #e5b9a8; border-color: #9a3a22; opacity: 1; animation: shake 0.4s; }
+
+.feedback { margin-top: 0.6em; font-style: italic; min-height: 1.4em; }
+.feedback.ok { color: #3f6a1e; }
+.feedback.ko { color: #8e1b14; }
+
+.reveal { opacity: 0; animation: reveal 0.35s ease-out forwards; animation-delay: calc(var(--i, 0) * 0.06s); }
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  50% { transform: scale(1.04); }
+}
+@keyframes shake {
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.panel-in { animation: panel-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(-50%) translateX(40px); }
+}
+
+.btn-row { display: flex; gap: 0.6em; flex-wrap: wrap; margin-top: 1em; }

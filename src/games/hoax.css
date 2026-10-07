@@ -1,0 +1,90 @@
+.hoax { position: fixed; inset: 0; pointer-events: none; }
+.hoax-folder {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  width: min(500px, calc(100vw - 32px));
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 1.6em 1.8em 1.2em;
+  pointer-events: auto;
+  color: var(--ink);
+  font-family: var(--serif);
+  background: linear-gradient(170deg, #d9b97a, #c49a55);
+  border-radius: 4px 4px 6px 6px;
+  box-shadow: inset 0 0 40px rgba(90, 55, 15, 0.35), 6px 12px 30px rgba(0, 0, 0, 0.55);
+  animation: hoax-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes hoax-in { from { opacity: 0; transform: translateY(-46%) rotate(1.5deg); } }
+.hoax-tab {
+  position: absolute;
+  top: -1.6em;
+  left: 1.5em;
+  padding: 0.3em 1em;
+  border-radius: 6px 6px 0 0;
+  background: #d9b97a;
+  font-family: "Special Elite", "Courier New", monospace;
+  font-size: 0.85em;
+}
+.hoax-folder h2 { margin: 0.05em 0 0.5em; font-weight: normal; font-size: 2em; }
+.hoax-card {
+  position: relative;
+  padding: 1.2em 1.3em;
+  min-height: 7.5em;
+  background:
+    linear-gradient(rgba(70, 90, 140, 0.12) 1px, transparent 1px) 0 0.95em / 100% 1.6em,
+    #f6f0de;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.25);
+  transform: rotate(-0.6deg);
+  overflow: hidden;
+}
+.hoax-card p { margin: 0; font-family: "Special Elite", "Courier New", monospace; font-size: 1.05em; line-height: 1.6; color: #22201c; }
+
+/* Le tampon s'abat sur la fiche */
+.hoax-stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0.15em 0.5em;
+  border: 4px double currentColor;
+  border-radius: 6px;
+  font-family: var(--display);
+  font-size: 2.2em;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%) rotate(-14deg) scale(2.6);
+}
+.hoax-stamp.on { animation: stamp 0.28s cubic-bezier(0.5, 0, 0.75, 0) forwards; }
+.hoax-stamp.ok { color: #2f6a1a; }
+.hoax-stamp.ko { color: #a3170f; }
+@keyframes stamp {
+  to { opacity: 0.85; transform: translate(-50%, -50%) rotate(-14deg) scale(1); }
+}
+
+.hoax-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; margin-top: 1em; }
+button.stamp-btn {
+  padding: 0.7em;
+  font-family: var(--display);
+  font-size: 1.15em;
+  letter-spacing: 0.06em;
+  color: #fff8e6;
+  border: none;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25), 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+button.stamp-btn.ok { background: linear-gradient(#4f8a32, #2f6a1a); }
+button.stamp-btn.ko { background: linear-gradient(#c43a2a, #8e1b14); }
+button.stamp-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25); }
+
+.hoax-verdict { margin-top: 0.9em; line-height: 1.5; min-height: 1em; }
+.hoax-verdict:not(:empty) { animation: reveal 0.3s ease-out; }
+.hoax-verdict .good { color: #2f6a1a; }
+.hoax-verdict .bad { color: #8e1b14; }
+.hoax-foot { display: flex; align-items: center; gap: 1.2em; margin-top: 1em; font-style: italic; }
+.hoax-foot button { margin-left: auto; font-size: 0.85em; }
+
+@media (max-width: 700px) {
+  .hoax-folder { top: auto; bottom: 12px; right: 16px; transform: none; max-height: 70vh; }
+}

@@ -1,0 +1,50 @@
+export interface HistoryQuestion {
+  event: string;
+  q: string;
+  /** La bonne réponse est toujours la première (les choix sont mélangés à l'affichage). */
+  choices: string[];
+  /** Année, pour classer la question dans une époque (négatif = avant J.-C.). */
+  year: number;
+  explain: string;
+}
+
+export const HISTORY: HistoryQuestion[] = [
+  { event: 'La construction de la grande pyramide de Khéops', q: 'Vers quelle date fut-elle achevée ?', choices: ['Vers 2560 av. J.-C.', 'Vers 1200 av. J.-C.', 'Vers 500 av. J.-C.', 'Vers 30 av. J.-C.'], year: -2560, explain: "Elle fut la plus haute construction humaine pendant près de 4 000 ans. Cléopâtre a vécu plus près de notre époque que de sa construction !" },
+  { event: 'La fondation de Rome', q: 'Selon la légende, en quelle année Romulus fonda-t-il Rome ?', choices: ['753 av. J.-C.', '1000 av. J.-C.', '476 av. J.-C.', '44 av. J.-C.'], year: -753, explain: "D'après la légende, les jumeaux Romulus et Rémus avaient été allaités par une louve. Romulus aurait tracé l'enceinte de la ville en 753 av. J.-C." },
+  { event: "L'assassinat de Jules César", q: 'En quelle année César fut-il poignardé au Sénat ?', choices: ['44 av. J.-C.', '52 av. J.-C.', '27 av. J.-C.', '14 apr. J.-C.'], year: -44, explain: "Il fut tué le 15 mars, aux « ides de mars », par des sénateurs dont Brutus, qu'il considérait presque comme un fils." },
+  { event: "La chute de l'Empire romain d'Occident", q: 'En quelle année le dernier empereur romain d’Occident fut-il déposé ?', choices: ['476', '1453', '800', '313'], year: 476, explain: "Le jeune empereur Romulus Augustule fut déposé par le chef germain Odoacre. Les historiens y voient traditionnellement le début du Moyen Âge." },
+  { event: 'Le couronnement de Charlemagne', q: 'En quelle année Charlemagne fut-il couronné empereur à Rome ?', choices: ['800', '732', '987', '1066'], year: 800, explain: 'Le pape Léon III le couronna le jour de Noël de l’an 800, dans la basilique Saint-Pierre.' },
+  { event: 'La bataille de Hastings', q: 'En quelle année Guillaume le Conquérant envahit-il l’Angleterre ?', choices: ['1066', '1215', '911', '1346'], year: 1066, explain: "Le duc de Normandie battit le roi Harold. La célèbre tapisserie de Bayeux, longue d'environ 70 mètres, raconte cette conquête." },
+  { event: 'La Grande Charte (Magna Carta)', q: 'En quelle année le roi d’Angleterre dut-il signer la Magna Carta ?', choices: ['1215', '1066', '1492', '1689'], year: 1215, explain: 'Pour la première fois, un roi acceptait que son pouvoir soit limité par la loi. Ce texte inspire encore les droits fondamentaux aujourd’hui.' },
+  { event: "La délivrance d'Orléans par Jeanne d'Arc", q: 'En quelle année Jeanne d’Arc libéra-t-elle Orléans ?', choices: ['1429', '1515', '1346', '1453'], year: 1429, explain: "À 17 ans, elle redonna espoir aux Français pendant la guerre de Cent Ans. Elle fut brûlée à Rouen deux ans plus tard, en 1431." },
+  { event: 'La prise de Constantinople', q: 'En quelle année les Ottomans s’emparèrent-ils de Constantinople ?', choices: ['1453', '1204', '1529', '1071'], year: 1453, explain: "Le sultan Mehmed II prit la ville, mettant fin à l'Empire byzantin, héritier de Rome. Constantinople est aujourd'hui Istanbul." },
+  { event: 'La Bible de Gutenberg', q: 'Vers quelle année Gutenberg imprima-t-il sa célèbre Bible ?', choices: ['Vers 1455', 'Vers 1250', 'Vers 1610', 'Vers 1700'], year: 1455, explain: "Grâce aux caractères mobiles en métal, on pouvait enfin reproduire les livres en grand nombre. Une révolution pour la diffusion du savoir." },
+  { event: "L'arrivée de Christophe Colomb en Amérique", q: 'En quelle année Colomb atteignit-il les Caraïbes ?', choices: ['1492', '1515', '1453', '1607'], year: 1492, explain: "Il pensait avoir atteint les Indes en traversant l'Atlantique vers l'ouest. C'est pour cela qu'on a appelé « Indiens » les peuples d'Amérique." },
+  { event: 'Le premier tour du monde', q: "En quelle année l'expédition de Magellan revint-elle après avoir fait le tour de la Terre ?", choices: ['1522', '1492', '1600', '1768'], year: 1522, explain: 'Sur environ 240 marins partis en 1519, seuls 18 revinrent. Magellan lui-même était mort en chemin, aux Philippines.' },
+  { event: 'Galilée et les lunes de Jupiter', q: 'En quelle année Galilée découvrit-il les lunes de Jupiter à la lunette ?', choices: ['1610', '1543', '1687', '1492'], year: 1610, explain: "C'était la preuve que tout ne tourne pas autour de la Terre. Ces quatre lunes s'appellent aujourd'hui les « satellites galiléens »." },
+  { event: 'La mort de Louis XIV', q: 'En quelle année mourut le Roi-Soleil ?', choices: ['1715', '1789', '1661', '1643'], year: 1715, explain: "Il régna 72 ans, le plus long règne de l'histoire de France. Il avait fait de Versailles le centre du pouvoir." },
+  { event: "La Déclaration d'indépendance des États-Unis", q: 'En quelle année les colonies américaines proclamèrent-elles leur indépendance ?', choices: ['1776', '1789', '1812', '1754'], year: 1776, explain: "Le 4 juillet 1776. C'est encore aujourd'hui la fête nationale des États-Unis." },
+  { event: 'Le premier vol habité en montgolfière', q: 'En quelle année des hommes volèrent-ils pour la première fois en ballon ?', choices: ['1783', '1903', '1850', '1709'], year: 1783, explain: "Pilâtre de Rozier et le marquis d'Arlandes survolèrent Paris dans un ballon des frères Montgolfier, à air chaud." },
+  { event: 'La prise de la Bastille', q: 'En quelle année le peuple de Paris prit-il la Bastille ?', choices: ['1789', '1792', '1815', '1776'], year: 1789, explain: "Le 14 juillet 1789, cette prison-forteresse, symbole du pouvoir royal, tomba. C'est le début de la Révolution française." },
+  { event: 'Le sacre de Napoléon', q: 'En quelle année Napoléon fut-il sacré empereur à Notre-Dame ?', choices: ['1804', '1799', '1815', '1789'], year: 1804, explain: "Il se posa lui-même la couronne sur la tête, devant le pape Pie VII. Le peintre David a immortalisé la scène." },
+  { event: 'La bataille de Waterloo', q: 'En quelle année Napoléon fut-il définitivement vaincu à Waterloo ?', choices: ['1815', '1805', '1812', '1830'], year: 1815, explain: 'Battu en Belgique par les Anglais et les Prussiens, il fut exilé sur l’île de Sainte-Hélène, en plein Atlantique.' },
+  { event: "L'abolition de l'esclavage en France", q: "En quelle année la France abolit-elle définitivement l'esclavage ?", choices: ['1848', '1794', '1789', '1905'], year: 1848, explain: "Grâce notamment à Victor Schœlcher. Une première abolition, en 1794, avait été annulée par Napoléon en 1802." },
+  { event: 'Le téléphone de Graham Bell', q: 'En quelle année Bell déposa-t-il le brevet du téléphone ?', choices: ['1876', '1840', '1903', '1920'], year: 1876, explain: "Les premiers mots transmis auraient été : « Monsieur Watson, venez ici, j'ai besoin de vous. »" },
+  { event: 'L’inauguration de la tour Eiffel', q: 'Pour quelle Exposition universelle la tour Eiffel fut-elle inaugurée ?', choices: ['1889', '1900', '1855', '1937'], year: 1889, explain: "Construite pour le centenaire de la Révolution, elle devait être démontée après 20 ans. Elle fut sauvée grâce à son utilité pour la radio." },
+  { event: 'La première projection des frères Lumière', q: 'En quelle année les frères Lumière firent-ils la première séance publique de cinéma ?', choices: ['1895', '1920', '1880', '1908'], year: 1895, explain: "Le 28 décembre 1895, à Paris. Le public découvrit des scènes de la vie quotidienne, comme une sortie d'usine." },
+  { event: 'Le premier vol des frères Wright', q: 'En quelle année les frères Wright firent-ils voler le premier avion motorisé ?', choices: ['1903', '1890', '1914', '1927'], year: 1903, explain: 'Le premier vol dura 12 secondes et parcourut environ 37 mètres, à peu près l’envergure d’un avion de ligne moyen-courrier actuel !' },
+  { event: "L'armistice de la Première Guerre mondiale", q: 'En quelle année fut signé l’armistice du 11 novembre ?', choices: ['1918', '1914', '1919', '1945'], year: 1918, explain: 'Signé dans un wagon, en forêt de Compiègne, il mit fin aux combats de la « Grande Guerre ».' },
+  { event: 'La découverte du tombeau de Toutânkhamon', q: 'En quelle année Howard Carter découvrit-il le tombeau ?', choices: ['1922', '1799', '1950', '1880'], year: 1922, explain: "Presque intact après 3 000 ans, il contenait plus de 5 000 objets, dont le célèbre masque d'or du jeune pharaon." },
+  { event: 'Le Débarquement en Normandie', q: 'En quelle année eut lieu le Débarquement allié en Normandie ?', choices: ['1944', '1942', '1945', '1940'], year: 1944, explain: "Le 6 juin 1944, le « Jour J », plus de 150 000 soldats débarquèrent sur les plages normandes." },
+  { event: 'Le lancement de Spoutnik', q: 'En quelle année le premier satellite artificiel fut-il lancé ?', choices: ['1957', '1969', '1945', '1961'], year: 1957, explain: "Lancé par l'URSS, il n'était guère plus gros qu'un ballon de plage et émettait un simple « bip-bip ». La course à l'espace commençait." },
+  { event: 'Le premier homme dans l’espace', q: 'En quelle année Youri Gagarine fit-il le tour de la Terre ?', choices: ['1961', '1957', '1969', '1975'], year: 1961, explain: "Son vol dura 108 minutes. En décollant, il lança : « Poyekhali ! » (« C'est parti ! »)." },
+  { event: 'Le premier pas sur la Lune', q: 'En quelle année Neil Armstrong marcha-t-il sur la Lune ?', choices: ['1969', '1961', '1975', '1981'], year: 1969, explain: "« C'est un petit pas pour l'homme, mais un bond de géant pour l'humanité. » Ses empreintes y sont toujours, faute de vent pour les effacer." },
+  { event: 'La chute du mur de Berlin', q: 'En quelle année le mur de Berlin tomba-t-il ?', choices: ['1989', '1991', '1961', '1975'], year: 1989, explain: "Construit en 1961, il séparait Berlin en deux. Sa chute, le 9 novembre 1989, annonça la fin de la guerre froide." },
+];
+
+export function era(year: number) {
+  if (year < 476) return 'Antiquité';
+  if (year < 1492) return 'Moyen Âge';
+  if (year < 1789) return 'Temps modernes';
+  return 'Époque contemporaine';
+}

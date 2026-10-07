@@ -1,0 +1,196 @@
+/* ---------- Commun aux ateliers « questionnaire » ---------- */
+.pq-root { position: fixed; inset: 0; pointer-events: none; }
+.pq-panel {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  max-height: 92vh;
+  overflow-y: auto;
+  pointer-events: auto;
+  color: var(--ink);
+}
+.pq-panel.turn { animation: pq-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes pq-in {
+  from { opacity: 0; transform: translateY(-46%) rotate(2deg); }
+}
+.pq-title { margin: 0.05em 0 0.3em; font-weight: normal; font-size: 1.9em; }
+.pq-q { font-weight: normal; margin: 0.4em 0 0.5em; }
+.pq-panel.turn .pq-q { animation: write 0.5s steps(20) both; }
+@keyframes write { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.pq-explain { line-height: 1.5; }
+.pq-score { margin-top: 0.8em; font-size: 0.9em; opacity: 0.7; font-style: italic; }
+.pq-big { font-size: 3.5em; margin: 0.2em 0; color: #8e1b14; }
+
+/* ---------- Carnet de l'ingénieur (papier quadrillé) ---------- */
+.desk-quiz .pq-panel {
+  width: min(480px, calc(100vw - 32px));
+  padding: 1.6em 1.8em 1.4em 3.4em;
+  border-radius: 3px;
+  background:
+    linear-gradient(to right, transparent 2.3em, rgba(190, 40, 40, 0.5) 2.3em, rgba(190, 40, 40, 0.5) calc(2.3em + 1px), transparent calc(2.3em + 1px)),
+    linear-gradient(rgba(60, 110, 170, 0.18) 1px, transparent 1px) 0 0 / 100% 22px,
+    linear-gradient(90deg, rgba(60, 110, 170, 0.18) 1px, transparent 1px) 0 0 / 22px 100%,
+    linear-gradient(#f7f1e1, #ece2c8);
+  box-shadow: 0 0 0 1px rgba(80, 60, 30, 0.35), 6px 10px 30px rgba(0, 0, 0, 0.55);
+  font-family: "Caveat", "Segoe Print", cursive;
+  font-size: 1.25em;
+}
+/* trous de reliure */
+.desk-quiz .pq-panel::before {
+  content: "";
+  position: absolute;
+  left: 0.6em;
+  top: 1em;
+  bottom: 1em;
+  width: 0.9em;
+  background: radial-gradient(circle, #2a1d12 0.28em, transparent 0.32em) center top / 0.9em 2.2em repeat-y;
+  opacity: 0.85;
+}
+.desk-quiz .kicker { font-family: var(--display); font-size: 0.7em; color: #2a4a7a; }
+.desk-quiz .pq-title { font-family: var(--serif); color: #1e3a66; font-size: 1.5em; }
+.desk-quiz .pq-q { font-size: 1.35em; color: #1a2a4a; }
+.desk-quiz button.note-choice {
+  font-family: "Caveat", cursive;
+  font-size: 1.1em;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed rgba(30, 50, 90, 0.3);
+  border-radius: 0;
+  padding: 0.2em 0.2em 0.2em 1.6em;
+  position: relative;
+  color: #1a2a4a;
+}
+.desk-quiz button.note-choice::before { content: "☐"; position: absolute; left: 0.1em; opacity: 0.7; }
+.desk-quiz button.note-choice.right { background: rgba(120, 170, 90, 0.18); }
+.desk-quiz button.note-choice.right::before { content: "☑"; color: #2f6a1a; opacity: 1; }
+.desk-quiz button.note-choice.wrong { background: transparent; text-decoration: line-through; text-decoration-color: #b02a1a; }
+.desk-quiz button.note-choice.wrong::before { content: "☒"; color: #b02a1a; opacity: 1; }
+.desk-quiz .pq-explain {
+  font-family: "Caveat", cursive;
+  color: #3a3a3a;
+  padding: 0.5em 0.7em;
+  background: rgba(255, 240, 150, 0.45);
+  transform: rotate(-0.6deg);
+  box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.15);
+}
+.desk-quiz button:not(.note-choice) { font-family: var(--serif); font-size: 0.75em; }
+.desk-quiz .pq-score, .desk-quiz .feedback { font-size: 0.9em; }
+
+/* ---------- Paillasse du chimiste (fioles) ---------- */
+.chem-quiz .pq-panel {
+  width: min(600px, calc(100vw - 32px));
+  padding: 1.3em 1.6em;
+  border: 1px solid #6b4a1e;
+  background:
+    radial-gradient(ellipse at 30% 10%, rgba(255, 250, 235, 0.5), transparent 60%),
+    linear-gradient(160deg, #eadbb6, #d4bd8a);
+  box-shadow: 0 0 0 5px rgba(50, 32, 12, 0.6), 0 20px 50px rgba(0, 0, 0, 0.55);
+  font-family: var(--serif);
+}
+.chem-quiz .pq-q { font-size: 1.35em; }
+
+.flasks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; margin: 0.8em 0 0.4em; }
+button.flask {
+  position: relative;
+  padding: 0 0 0.3em;
+  background: none;
+  border: none;
+  box-shadow: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: flask-in 0.5s both;
+  animation-delay: var(--d);
+}
+@keyframes flask-in { from { opacity: 0; transform: translateY(14px); } }
+button.flask:hover:not(:disabled) { transform: translateY(-4px); filter: none; }
+button.flask:disabled { cursor: default; opacity: 1; }
+
+.flask-glass {
+  position: relative;
+  width: 86px;
+  height: 104px;
+  clip-path: polygon(40% 0, 60% 0, 60% 32%, 100% 96%, 96% 100%, 4% 100%, 0 96%, 40% 32%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.55) 30%, rgba(255, 255, 255, 0.2) 60%, rgba(255, 255, 255, 0.4));
+}
+.flask-liquid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 52%;
+  background: linear-gradient(var(--liq), color-mix(in srgb, var(--liq) 70%, black));
+  transition: filter 0.4s;
+}
+.flask-liquid i {
+  position: absolute;
+  bottom: 4px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+}
+.flask-liquid i:nth-child(1) { left: 30%; animation-delay: 0s; }
+.flask-liquid i:nth-child(2) { left: 50%; animation-delay: 0.3s; width: 5px; height: 5px; }
+.flask-liquid i:nth-child(3) { left: 62%; animation-delay: 0.6s; }
+.flask-liquid i:nth-child(4) { left: 42%; animation-delay: 0.9s; width: 4px; height: 4px; }
+.flask-liquid i:nth-child(5) { left: 55%; animation-delay: 1.2s; }
+
+/* Bonne fiole : elle s'illumine et bouillonne */
+button.flask.right .flask-liquid { filter: brightness(1.35) saturate(1.3); animation: liquid-glow 1.2s ease-in-out infinite alternate; }
+button.flask.right .flask-liquid i { animation: bubble 1.4s ease-in infinite; }
+@keyframes bubble {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  20% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-120px) scale(1.2); }
+}
+@keyframes liquid-glow { to { filter: brightness(1.6) saturate(1.5); } }
+button.flask.right .flask-glass { filter: drop-shadow(0 0 12px var(--liq)); }
+
+/* Mauvaise fiole : elle tremble et fume */
+button.flask.wrong { animation: shake 0.45s; }
+button.flask.wrong .flask-liquid { filter: grayscale(0.7) brightness(0.6); }
+.smoke { position: absolute; top: -6px; left: 50%; pointer-events: none; }
+.smoke i {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  margin-left: -13px;
+  border-radius: 50%;
+  background: rgba(90, 85, 80, 0.55);
+  filter: blur(6px);
+  opacity: 0;
+}
+button.flask.wrong .smoke i { animation: smoke 1.8s ease-out forwards; }
+button.flask.wrong .smoke i:nth-child(2) { animation-delay: 0.25s; }
+button.flask.wrong .smoke i:nth-child(3) { animation-delay: 0.5s; }
+@keyframes smoke {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  30% { opacity: 0.8; }
+  100% { opacity: 0; transform: translate(12px, -90px) scale(2.4); }
+}
+
+.flask-label {
+  margin-top: 0.4em;
+  padding: 0.3em 0.5em;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.92em;
+  line-height: 1.15;
+  background: #f3e9cf;
+  border: 1px solid #5a3e1a;
+  box-shadow: inset 0 0 0 2px #f3e9cf, inset 0 0 0 3px rgba(90, 62, 26, 0.5);
+}
+button.flask.right .flask-label { background: #d6e6bf; }
+button.flask.wrong .flask-label { background: #e8c2b2; text-decoration: line-through; }
+
+@media (max-width: 700px) {
+  .pq-panel { top: auto; bottom: 12px; right: 16px; transform: none; max-height: 60vh; }
+  .flasks { grid-template-columns: repeat(2, 1fr); }
+}
