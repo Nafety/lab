@@ -11,6 +11,8 @@ export interface PlayerState {
   name: string;
   p: [number, number, number];
   yaw: number;
+  /** a reçu la bénédiction du grimoire (bracelets d'or) */
+  gold?: boolean;
 }
 
 /** Messages de jeu (parties communes) : transmis tels quels, voir match.ts. */
@@ -181,9 +183,9 @@ export class Network {
   }
 
   /** Envoie notre position (appelé une dizaine de fois par seconde). */
-  sendState(p: [number, number, number], yaw: number) {
+  sendState(p: [number, number, number], yaw: number, gold: boolean) {
     if (!this.connected) return;
-    this.broadcast({ t: 'state', s: { id: this.id, name: this.name, p, yaw } });
+    this.broadcast({ t: 'state', s: { id: this.id, name: this.name, p, yaw, gold } });
   }
 
   /** Oublie les joueurs silencieux depuis plus de 5 secondes. */

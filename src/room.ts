@@ -162,6 +162,8 @@ export function buildRoom(scene: THREE.Scene): { colliders: Collider[]; update: 
       { minX: HW, maxX: HW + t, minZ: SECRET_DOOR.z2, maxZ: HD + t, top: Infinity },
       // le sol du labo : on peut désormais descendre plus bas (escalier secret)
       { minX: -HW, maxX: HW, minZ: -HD, maxZ: HD, top: 0 },
+      // le plafond, sous les poutres : on ne le traverse pas en sautant depuis un meuble
+      { minX: -HW, maxX: HW, minZ: -HD, maxZ: HD, top: -Infinity, ceil: h - 0.32 },
     ],
     update: updateDust,
   };

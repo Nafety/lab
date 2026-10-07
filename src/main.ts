@@ -216,6 +216,8 @@ let activeGame: Game | null = null;
 let target: Station | null = null;
 const saved = { pos: new THREE.Vector3(), quat: new THREE.Quaternion() };
 let labUpdate: (t: number) => void = () => {};
+/** bénédiction du grimoire reçue : bracelets d'or, visibles aussi par les autres savants */
+let blessed = false;
 
 const startEl = $('start');
 const promptEl = $('prompt');
@@ -248,11 +250,15 @@ async function init() {
   (games.history as BookGame).books = lab.refs.library.books; // pour que l'hôte puisse préparer un livre
   // Récompense du passage secret, conservée d'une partie à l'autre
   try {
-    if (localStorage.getItem(MASTER_KEY)) arms.setGolden(true);
+    if (localStorage.getItem(MASTER_KEY)) blessed = true;
   } catch {
     // stockage indisponible
   }
-  addEventListener('le-labo:grand-maitre', () => arms.setGolden(true));
+  if (blessed) arms.setGolden(true);
+  addEventListener('le-labo:grand-maitre', () => {
+    blessed = true;
+    arms.setGolden(true);
+  });
 
   $('loading').classList.add('hidden');
   $('play').classList.remove('hidden');
@@ -436,7 +442,7 @@ renderer.setAnimationLoop((time) => {
   if (net.connected && netClock > 0.1) {
     netClock = 0;
     yawEuler.setFromQuaternion(camera.quaternion);
-    net.sendState(camera.position.toArray() as [number, number, number], yawEuler.y);
+    net.sendState(camera.position.toArray() as [number, number, number], yawEuler.y, blessed);
     net.prune();
   }
   avatars.update(net.others, dt, t);
